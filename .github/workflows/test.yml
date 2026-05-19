@@ -8,6 +8,14 @@ on:
 permissions:
   contents: read
 
+# The ubgo/cache contrib subdir modules are go-gettable but their v0.1.0
+# content predates a sum.golang.org entry, so the public checksum DB rejects
+# them. Resolve straight from the source (direct) with the sum DB disabled;
+# the committed per-example go.sum still pins exact module hashes.
+env:
+  GOPROXY: direct
+  GOSUMDB: "off"
+
 jobs:
   build:
     name: build (${{ matrix.example }})
