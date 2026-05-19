@@ -33,3 +33,15 @@ build/
 # AI session context (local only)
 CLAUDE.md
 TECHNICAL.md
+
+# compiled example binaries (name == dir)
+/01-basic/01-basic
+/02-remember/02-remember
+/03-generics/03-generics
+/04-decorators/04-decorators
+/05-tiered/05-tiered
+/06-codecs/06-codecs
+/07-locker/07-locker
+/08-cluster/08-cluster
+/09-observability/09-observability
+/10-admin/10-admin
