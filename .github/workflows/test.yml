@@ -8,6 +8,13 @@ on:
 permissions:
   contents: read
 
+# ubgo modules are tagged but not in sum.golang.org; fetch from source and
+# skip the public checksum DB. Integrity is still enforced by the committed
+# per-example go.sum (exact module hashes).
+env:
+  GOPROXY: direct
+  GOSUMDB: "off"
+
 jobs:
   build:
     name: build (${{ matrix.example }})
