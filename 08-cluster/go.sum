@@ -1,0 +1,6 @@
+github.com/ubgo/cache v0.1.0 h1:ZYgq8UJg9Xu7FTNFW3OWrSjFuEgeuTjTXUk4fL/Z7r4=
+github.com/ubgo/cache v0.1.0/go.mod h1:2Z6dYQnKqvklI06GfUpUxaopjTNay8wV5GYM+m1/zDk=
+github.com/ubgo/cache-cluster v0.1.0 h1:DaBUL86vrdEOyg7vy7t90B5UQdAAn3F2jIYed1PhH3M=
+github.com/ubgo/cache-cluster v0.1.0/go.mod h1:xfW2lpuBt3Vp9at5tbzCd7I+xyJDU/qkM8Jg58bvDsA=
+github.com/ubgo/cache-mem v0.1.0 h1:6e7zyxYXEzvXKJQhM7y+WWNct9+EAZBa6dHT/xgv4wo=
+github.com/ubgo/cache-mem v0.1.0/go.mod h1:RiX2fbnkS8VwagkuUnRm4e/2jtBvZBAAa42MXZkDYqI=

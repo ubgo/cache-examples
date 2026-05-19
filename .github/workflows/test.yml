@@ -1,0 +1,70 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build (${{ matrix.example }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        example:
+          - 01-basic
+          - 02-remember
+          - 03-generics
+          - 04-decorators
+          - 05-tiered
+          - 06-codecs
+          - 07-locker
+          - 08-cluster
+          - 09-observability
+          - 10-admin
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.24"
+      - run: cd ${{ matrix.example }} && go build ./...
+      - run: cd ${{ matrix.example }} && go vet ./...
+
+  smoke:
+    name: smoke (${{ matrix.example }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        example:
+          - 01-basic
+          - 02-remember
+          - 03-generics
+          - 04-decorators
+          - 05-tiered
+          - 06-codecs
+          - 07-locker
+          - 08-cluster
+          - 09-observability
+          - 10-admin
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.24"
+      - run: cd ${{ matrix.example }} && go mod download && go build -o /tmp/example .
+      - name: run (must exit 0)
+        run: |
+          cd ${{ matrix.example }}
+          timeout 30s /tmp/example > out.txt 2>&1
+          c=$?
+          if [ "$c" -ne 0 ]; then
+            echo "example exited with $c (expected 0)"
+            cat out.txt
+            exit 1
+          fi
+          head -20 out.txt
