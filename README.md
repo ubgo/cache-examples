@@ -1,5 +1,8 @@
 # cache-examples
 
+
+[![test](https://github.com/ubgo/cache-examples/actions/workflows/test.yml/badge.svg)](https://github.com/ubgo/cache-examples/actions/workflows/test.yml) [![tag](https://img.shields.io/github/v/tag/ubgo/cache-examples?sort=semver)](https://github.com/ubgo/cache-examples/tags) [![license](https://img.shields.io/badge/license-source--available-blue)](./LICENSE) ![Go](https://img.shields.io/badge/go-1.24-00ADD8?logo=go)
+
 Runnable example applications for the [`github.com/ubgo/cache`](https://github.com/ubgo/cache) family — in-memory, Redis, tiered, cluster, codecs, decorators, locker, observability, and the admin endpoint.
 
 Each example is a self-contained Go module under its own subdirectory. Every example runs to completion and exits 0 with **no external services**: Redis is provided in-process by [`miniredis`](https://github.com/alicebob/miniredis), cluster/admin use `httptest`, and OpenTelemetry uses a manual reader. Clone, `cd`, and run `go run .`.
