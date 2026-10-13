@@ -77,6 +77,17 @@ func run() error {
 	fmt.Printf("read-promotion: B promotions so far = %d\n", b.Promotions())
 
 	// --- Cross-instance invalidation ---
+	// Pub/Sub does not replay: a message published before a subscriber's
+	// SUBSCRIBE lands is lost. Each instance subscribes in a background
+	// goroutine, so wait until both are on the channel before publishing,
+	// otherwise the Del below can race ahead and B never hears it.
+	subDeadline := time.Now().Add(2 * time.Second)
+	for mr.PubSubNumSub(invChannel)[invChannel] < 2 {
+		if time.Now().After(subDeadline) {
+			return errors.New("invalidation subscribers did not attach within deadline")
+		}
+		time.Sleep(5 * time.Millisecond)
+	}
 	// B now holds user:42 in its own L1. A deletes the key; the tiered cache
 	// publishes on the bus and B's subscriber drops its local L1 copy.
 	if err := a.Del(ctx, "user:42"); err != nil {

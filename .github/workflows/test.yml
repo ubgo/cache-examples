@@ -73,9 +73,10 @@ jobs:
           cd ${{ matrix.example }}
           timeout 30s /tmp/example > out.txt 2>&1
           c=$?
+          # Print the whole output either way: a failure is useless if the
+          # error line was cut off.
+          cat out.txt
           if [ "$c" -ne 0 ]; then
             echo "example exited with $c (expected 0)"
-            cat out.txt
             exit 1
           fi
-          head -20 out.txt
